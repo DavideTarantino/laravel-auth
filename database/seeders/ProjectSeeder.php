@@ -22,7 +22,7 @@ class ProjectSeeder extends Seeder
             $project->name = $faker->sentence(5);
             $project->owner = $faker->name;
             $project->creation_date = $faker->date;
-            $project->slug = Str::slug($post->title, '-');
+            $project->slug = Str::slug($project->title, '-');
 
             $project->save();
         } 
