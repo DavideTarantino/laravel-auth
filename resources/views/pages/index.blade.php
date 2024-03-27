@@ -27,7 +27,7 @@
                         <td>{{ $item->creation_date }}</td>
                         <td>{{ $item->slug }}</td>
                         <td>
-                            <a class="btn btn-primary" href="{{ route('dashboard.projects.edit', $item->id) }}">Edit</a>
+                            <a class="btn btn-primary" href="{{ route('dashboard.projects.edit', $item->slug) }}">Edit</a>
 
                             <form method="POST" action="{{ route('dashboard.projects.destroy', $item->slug) }}">                          
                                 @csrf

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use App\Http\Requests\StoreProjectRequest;
+use App\Http\Requests\UpdateProjectRequest;
 use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
@@ -55,15 +56,23 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        //
+        return view('pages.edit', compact('project'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Project $project)
+    public function update(UpdateProjectRequest $request, Project $project)
     {
-        //
+        $val_data = $request->validated();
+
+        $slug = Project::generateSlug($request->name);
+
+        $val_data['slug'] = $slug;
+
+        $project->update( $val_data );
+
+        return redirect()->route('dashboard.projects.index');
     }
 
     /**
