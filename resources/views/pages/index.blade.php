@@ -29,12 +29,12 @@
                         <td>
                             <a class="btn btn-primary" href="{{ route('dashboard.projects.edit', $item->id) }}">Edit</a>
 
-                            {{-- <form method="POST" action="{{ route('dashboard.posts.destroy', $item->id) }}">                          
+                            <form method="POST" action="{{ route('dashboard.projects.destroy', $item->slug) }}">                          
                                 @csrf
                                 @method('DELETE')
 
                                 <button type="submit" class="btn btn-danger">Delete</button>
-                            </form> --}}
+                            </form>
                         </td>
                     </tr>    
                     @endforeach
