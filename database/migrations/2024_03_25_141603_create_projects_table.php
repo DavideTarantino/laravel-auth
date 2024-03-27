@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name', 150)->unique();
             $table->string('owner', 50);
-            $table->date('creation_date');
+            $table->date('creation_date')->nullable();
             $table->string('slug');
             $table->timestamps();
         });

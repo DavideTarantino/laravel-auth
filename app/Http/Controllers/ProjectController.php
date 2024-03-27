@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
-use Illuminate\Http\Request;
-use Illuminate\Support\Str;
+use App\Http\Requests\StoreProjectRequest;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -23,15 +23,23 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreProjectRequest $request)
     {
-        //
+        $val_data = $request->validated();
+
+        $slug = Project::generateSlug($request->name);
+
+        $val_data['slug'] = $slug;
+
+        $new_project = Project::create( $val_data );
+
+        return redirect()->route('dashboard.projects.index');
     }
 
     /**
