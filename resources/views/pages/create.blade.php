@@ -5,7 +5,7 @@
 
         <h1>Create a new project</h1>
 
-        <form action="{{ route('dashboard.projects.store') }}" method="POST">
+        <form action="{{ route('dashboard.projects.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
             <div class="mb-3">
@@ -36,6 +36,14 @@
                     aria-describedby="helpId"
                     placeholder=""
                 />
+            </div>
+
+            <div class="mb-3">
+                <input
+                    type="file" 
+                    name="cover_image" 
+                    id="cover_image" 
+                    class="form-control @error('cover_image') is-invalid @enderror">
             </div>
 
             <div class="mb-3">

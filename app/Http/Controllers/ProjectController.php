@@ -38,6 +38,14 @@ class ProjectController extends Controller
 
         $val_data['slug'] = $slug;
 
+        if( $request->hasFile('cover_image') ){
+
+            $path = Storage::disk('public')->put( 'project_images', $request->cover_image );
+
+
+            $val_data['cover_image'] = $path;
+        }
+
         $new_project = Project::create( $val_data );
 
         return redirect()->route('dashboard.projects.index');
@@ -48,7 +56,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-
+        return view('pages.show', compact('project'));
     }
 
     /**
@@ -70,6 +78,16 @@ class ProjectController extends Controller
 
         $val_data['slug'] = $slug;
 
+        if( $request->hasFile('cover_image') ){
+            if( $project->cover_image ){
+                Storage::delete($project->cover_image);
+            }
+
+            $path = Storage::disk('public')->put('project_images', $request->cover_image);
+
+            $val_data['cover_image'] = $path;
+        }
+
         $project->update( $val_data );
 
         return redirect()->route('dashboard.projects.index');
@@ -80,6 +98,10 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
+        if( $project->cover_image ){
+            Storage::delete($project->cover_image);
+        };
+
         $project->delete();
 
         return redirect()->route('dashboard.projects.index');

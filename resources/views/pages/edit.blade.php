@@ -5,7 +5,7 @@
 
         <h1>Modify a project</h1>
 
-        <form action="{{ route('dashboard.projects.update', $project->slug) }}" method="POST">
+        <form action="{{ route('dashboard.projects.update', $project->slug) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
 
@@ -37,6 +37,21 @@
                     id="owner"
                     value="{{ old('owner', $project->owner) }}"
                 />
+            </div>
+
+            <div class="mt-3">
+                @if($project->cover_image)
+                    <img src="{{ asset('/storage/' . $project->cover_image) }}" alt="" style="width: 400px">
+                @endif
+
+                <div class="mt-3 mb-3">
+                    <input
+                        type="file" 
+                        name="cover_image" 
+                        id="cover_image" 
+                        class="form-control @error('cover_image') is-invalid @enderror">
+                </div>
+    
             </div>
 
             <button type="submit" class="btn btn-primary">Update</button>

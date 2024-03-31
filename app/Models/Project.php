@@ -15,7 +15,8 @@ class Project extends Model
         'name',
         'owner',
         'creation_date',
-        'slug'
+        'slug',
+        'cover_image'
     ];
 
     public static function generateSlug($name){
